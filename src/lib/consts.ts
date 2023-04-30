@@ -28,7 +28,7 @@ export const SPECIAL_SERVERS = {
 };
 
 // default API URL - when support for other instances is added, this will be the default one
-export const DEFAULT_API_URL = 'https://api.revolt.chat'; // TODO: switch to https://revolt.chat/api when it's available
+export const DEFAULT_API_URL = 'https://api.divolt.xyz'; // TODO: switch to https://revolt.chat/api when it's available
 
 // default max side param - used to specify the size of images
 export const DEFAULT_MAX_SIDE = '128';
@@ -173,6 +173,7 @@ export const LOADING_SCREEN_REMARKS = [
   'Fun fact: RVMob is built with React Native.',
   'Better grab a book or something.',
   'When will the madness end?',
-  'You know, what does RVMob even stand for?',
+  'You know, what does DVMob even stand for?',
   'Why do they call it a "building" if it\'s already built?',
+  'balls',
 ];
