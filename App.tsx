@@ -29,8 +29,8 @@ import {Notification} from './src/components/Notification';
 
 async function createChannel() {
   const channel = await notifee.createChannel({
-    id: 'rvmob',
-    name: 'RVMob',
+    id: 'dvmob',
+    name: 'DVMob',
   });
   return channel;
 }

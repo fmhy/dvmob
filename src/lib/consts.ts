@@ -42,6 +42,7 @@ export const INVITE_PATHS = [
   'nightly.revolt.chat/invite',
   'local.revolt.chat/invite',
   'rvlt.gg',
+  'divolt.xyz/invite',
 ];
 
 // regex to find server invites
@@ -57,6 +58,7 @@ export const BOT_INVITE_PATHS = [
   'app.revolt.chat/bot',
   'nightly.revolt.chat/bot',
   'local.revolt.chat/bot',
+  'divolt.xyz/bot',
 ];
 
 // regex to find bot invites
