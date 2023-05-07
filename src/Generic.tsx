@@ -283,7 +283,7 @@ export const app = {
     ] as Setting[],
   },
   openProfile: (u, s?: Server) => {},
-  openLeftMenu: o => {},
+  openLeftMenu: (o?: any) => {},
   openRightMenu: o => {},
   openInvite: i => {},
   openBotInvite: i => {},
@@ -298,6 +298,7 @@ export const app = {
   getReplyingMessages: () => {},
   pushToQueue: m => {},
   joinInvite: async (i: API.InviteResponse) => {},
+  logOut: () => {},
 };
 
 export function setFunction(name: string, func: any) {

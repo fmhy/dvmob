@@ -188,7 +188,7 @@ async function copyDebugInfo() {
     },
 
     appInfo: {
-      userID: client.user?._id,
+      userID: client.user?._id ?? 'ERR_ID_UNDEFINED',
       settings: await AsyncStorage.getItem('settings'),
       version: app.version,
     },
@@ -375,6 +375,22 @@ export const SettingsSheet = observer(({state}: {state: any}) => {
               </View>
               <Text>About RVMob</Text>
             </ContextButton>
+            <ContextButton
+              style={{flex: 1, marginTop: 10}}
+              backgroundColor={currentTheme.error}
+              onPress={() => {
+                state.setState({settingsOpen: false});
+                app.logOut();
+              }}>
+              <View style={styles.iconContainer}>
+                <MaterialIcon
+                  name={'logout'}
+                  color={currentTheme.foregroundPrimary}
+                  size={20}
+                />
+              </View>
+              <Text>Log Out</Text>
+            </ContextButton>
           </>
         ) : section === 'appearance' ? (
           <>
@@ -507,60 +523,75 @@ export const SettingsSheet = observer(({state}: {state: any}) => {
               </Text>
             </Pressable>
             <Text type={'header'}>About</Text>
-            <View style={{alignItems: 'center'}}>
-              <Image
-                source={icon}
-                style={{height: 150, width: 150, marginVertical: 4}}
-              />
-              <Text type={'header'}>RVMob v{app.version}</Text>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <Text>Powered by </Text>
-              <Link link={'https://reactnative.dev'} label={'React Native'} />
-              <Text>
-                {' '}
-                v{AppInfo.dependencies['react-native'].replace(
-                  '^',
-                  '',
-                )} and{' '}
-              </Text>
-              <Link
-                link={'https://github.com/revoltchat/revolt.js'}
-                label={'revolt.js'}
-              />
-              <Text>
-                {' '}
-                v{AppInfo.dependencies['revolt.js'].replace('^', '')}
-              </Text>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <Text>Made by </Text>
-              <Link link={'https://github.com/TaiAurori'} label={'TaiAurori'} />
-              <Text>, </Text>
-              <Link link={'https://github.com/Rexogamer'} label={'Rexogamer'} />
-              <Text> and </Text>
-              <Link
-                link={'https://github.com/revoltchat/rvmob/graphs/contributors'}
-                label={'other contributors'}
-              />
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <Text>Licensed under the </Text>
-              <Link
-                link={'https://github.com/revoltchat/rvmob/blob/master/LICENSE'}
-                label={'GNU GPL v3.0'}
-              />
-            </View>
-            <ContextButton
-              backgroundColor={currentTheme.error}
-              style={{justifyContent: 'center', marginTop: 10}}
-              onPress={() => {
-                app.settings.clear();
+            <View
+              style={{
+                alignItems: 'center',
               }}>
-              <Text style={{color: currentTheme.accentColorForeground}}>
-                Reset Settings
-              </Text>
-            </ContextButton>
+              <View style={{alignItems: 'center'}}>
+                <Image
+                  source={icon}
+                  style={{height: 150, width: 150, marginVertical: 4}}
+                />
+                <Text type={'header'}>RVMob v{app.version}</Text>
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <Text>Powered by </Text>
+                <Link link={'https://reactnative.dev'} label={'React Native'} />
+                <Text>
+                  {' '}
+                  v{AppInfo.dependencies['react-native'].replace(
+                    '^',
+                    '',
+                  )} and{' '}
+                </Text>
+                <Link
+                  link={'https://github.com/revoltchat/revolt.js'}
+                  label={'revolt.js'}
+                />
+                <Text>
+                  {' '}
+                  v{AppInfo.dependencies['revolt.js'].replace('^', '')}
+                </Text>
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <Text>Made by </Text>
+                <Link
+                  link={'https://github.com/TaiAurori'}
+                  label={'TaiAurori'}
+                />
+                <Text>, </Text>
+                <Link
+                  link={'https://github.com/Rexogamer'}
+                  label={'Rexogamer'}
+                />
+                <Text> and </Text>
+                <Link
+                  link={
+                    'https://github.com/revoltchat/rvmob/graphs/contributors'
+                  }
+                  label={'other contributors'}
+                />
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <Text>Licensed under the </Text>
+                <Link
+                  link={
+                    'https://github.com/revoltchat/rvmob/blob/master/LICENSE'
+                  }
+                  label={'GNU GPL v3.0'}
+                />
+              </View>
+              <ContextButton
+                backgroundColor={currentTheme.error}
+                style={{justifyContent: 'center', marginTop: 10}}
+                onPress={() => {
+                  app.settings.clear();
+                }}>
+                <Text style={{color: currentTheme.accentColorForeground}}>
+                  Reset Settings
+                </Text>
+              </ContextButton>
+            </View>
           </View>
         ) : null}
       </ScrollView>

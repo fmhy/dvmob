@@ -79,6 +79,14 @@ class MainView extends React.Component {
           : {rightMenuOpen: !this.state.rightMenuOpen},
       );
     });
+    setFunction('logOut', async () => {
+      console.log(
+        `[AUTH] Logging out of current session... (user: ${client.user?._id})`,
+      );
+      AsyncStorage.setItem('token', '');
+      client.logout();
+      this.setState({status: 'awaitingLogin'});
+    });
   }
   componentDidUpdate(_, prevState) {
     if (
@@ -106,8 +114,14 @@ class MainView extends React.Component {
       console.log(`[APP] Connected to instance (${new Date().getTime()})`);
     });
     client.on('ready', async () => {
-      const rawOrderedServers = await client.syncFetchSettings(['ordering']);
-      const orderedServers = JSON.parse(rawOrderedServers.ordering[1]).servers;
+      let orderedServers;
+      try {
+        const rawOrderedServers = await client.syncFetchSettings(['ordering']);
+        orderedServers = JSON.parse(rawOrderedServers.ordering[1]).servers;
+      } catch (err) {
+        console.log(`[APP] Error fetching ordered servers: ${err}`);
+        orderedServers === null;
+      }
       this.setState({
         status: 'loggedIn',
         network: 'ready',
@@ -204,7 +218,7 @@ class MainView extends React.Component {
         } catch (e: any) {
           console.log(e);
           !(
-            e.message.startsWith('Read error') || e.message === 'Network Error'
+            e.message?.startsWith('Read error') || e.message === 'Network Error'
           ) && client.user
             ? this.setState({logInError: e, status: 'awaitingLogin'})
             : this.state.status === 'loggedIn'
