@@ -284,7 +284,6 @@ export const app = {
   },
   openProfile: (u, s?: Server) => {},
   openLeftMenu: (o?: any) => {},
-  openRightMenu: o => {},
   openInvite: i => {},
   openBotInvite: i => {},
   openServer: (s?: Server) => {},
@@ -299,6 +298,8 @@ export const app = {
   pushToQueue: m => {},
   joinInvite: async (i: API.InviteResponse) => {},
   logOut: () => {},
+  openMemberList: (c: Channel | Server | null, u: User[] | null) => {},
+  openChannelContextMenu: (c: Channel | null) => {},
 };
 
 export function setFunction(name: string, func: any) {
