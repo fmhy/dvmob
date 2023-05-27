@@ -1,3 +1,8 @@
+# Notice
+This fork has now been archived as RVMob now supports instances, simply connect with `https://api.divolt.xyz` and restart. Any issues with instance switching should be opened there.
+
+--- 
+
 # DVMob
 
 **DVMob** is a mobile Divolt client made in React Native.
